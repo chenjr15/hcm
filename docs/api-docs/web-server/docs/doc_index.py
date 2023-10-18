@@ -33,7 +33,7 @@ class DocInfo:
         return
 
     def __str__(self) -> str:
-        return f'|{self.method}|{self.url}|{self.decsription}|[{self.filename}]({self.filename})|'
+        return f'|{self.method}|{self.url}|{self.decsription} [{self.filename}]({self.filename})|'
 
     def __repr__(self) -> str:
         return str(self)
@@ -57,8 +57,8 @@ class DocInfo:
                 biz = 'biz'
                 idx += 1
             elif url_parts[idx] == ("vendors"):
-                if url_parts[idx] == ("{vendor}"):
-                    vendor
+                if url_parts[idx+1] != ("{vendor}"):
+                    vendor = url_parts[idx+1]
                 idx += 1
             else:
                 resname = url_parts[idx]
@@ -123,7 +123,13 @@ def main():
 
     def print_title(n: int, types: tuple[str, str, str, str]):
         for i in range(4-n, 4):
-            print(f"##{'#'*i} [{types[i]}]({types[i]})\n", file=out)
+            if i < 2:
+                print(f"##{'#'*i} ", end='', file=out)
+                print(f"**{types[i]}**\n", file=out)
+            if i == 2:
+                print(f"> {types[i]} \n", file=out)
+            if i == 3:
+                print(f"\n`{types[i]}` \n", file=out)
 
     def diff_level(last: tuple, now: tuple) -> int:
         for i in range(len(last)):
@@ -136,22 +142,11 @@ def main():
         if types != last_types:
             # 打印标题 和表头
             print_title(diff_level(last_types, types), types)
-            print('| 方法| URL| 描述| 文档|', file=out)
-            print('|--------|--------|-----------------|--------|', file=out)
+            print('| 方法| URL| 描述&文档 |', file=out)
+            print('|--------|--------|-----------------|', file=out)
         last_types = types
         print(info, file=out)
-    # print([(t, len(list(data))) for t, data in result])
-    # 按文件夹分类
-    # for subdir in s.iterdir():
-    #     if not subdir.is_dir():
-    #         continue
-    #     print(f"## [{subdir}]({subdir})\n", file=out)
-    #     print('| 方法| URL| 描述| 文档|', file=out)
-    #     print('|--------|--------|-----------------|--------|', file=out)
-    #     infos = extract_all(subdir)
-    #     infos.sort(key=lambda x: x.url)
-    #     for info in infos:
-    #         print(info, file=out)
+
     out.close()
 
 
