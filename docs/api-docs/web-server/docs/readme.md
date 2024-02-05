@@ -43,7 +43,7 @@
 |POST|/api/v1/cloud/accounts/resources/accounts/list|查询资源账号列表 [resource/list_resource_account.md](resource/list_resource_account.md)|
 |DELETE|/api/v1/cloud/accounts/{account_id}|删除指定账号（注：如果账号下在HCM还有资源存在，则无法删除） [resource/delete_account.md](resource/delete_account.md)|
 |GET|/api/v1/cloud/accounts/{account_id}|查询指定账号 [resource/get_account.md](resource/get_account.md)|
-|POST|/api/v1/cloud/accounts/check|检查指定账号 [resource/check_account.md](resource/check_account.md)|
+|POST|/api/v1/cloud/accounts/check|检查指定账号v1.3.3+ 开始只能检查登记账号 [resource/check_account.md](resource/check_account.md)|
 
 `tcloud` 
 
@@ -104,6 +104,31 @@
 |POST|/api/v1/cloud/vendors/tcloud/applications/types/create_cvm|创建用于创建腾讯云虚拟机的申请 [resource/create_application_for_create_tcloud_cvm.md](resource/create_application_for_create_tcloud_cvm.md)|
 |POST|/api/v1/cloud/vendors/tcloud/applications/types/create_vpc|创建用于创建腾讯云VPC的申请 [resource/create_application_for_create_tcloud_vpc.md](resource/create_application_for_create_tcloud_vpc.md)|
 |POST|/api/v1/cloud/vendors/tcloud/applications/types/create_disk|创建用于创建腾讯云云盘的申请 [resource/create_application_for_create_tcloud_disk.md](resource/create_application_for_create_tcloud_disk.md)|
+### **argument_templates**
+
+> biz 
+
+
+`all_vendor` 
+
+| 方法| URL| 描述&文档 |
+|--------|--------|-----------------|
+|POST|/api/v1/cloud/bizs/{bk_biz_id}/argument_templates/instance/rule/list|业务下查询参数模版绑定的实例数及规则数列表 [biz/argument-template/list_template_instance_rule.md](biz/argument-template/list_template_instance_rule.md)|
+|POST|/api/v1/cloud/bizs/{bk_biz_id}/argument_templates/list|业务下查询参数模版列表 [biz/argument-template/list_template.md](biz/argument-template/list_template.md)|
+|POST|/api/v1/cloud/bizs/{bk_biz_id}/argument_templates/create|业务下创建参数模版 [biz/argument-template/create_template.md](biz/argument-template/create_template.md)|
+|DELETE|/api/v1/cloud/bizs/{bk_biz_id}/argument_templates/batch|业务下删除参数模版 [biz/argument-template/delete_template.md](biz/argument-template/delete_template.md)|
+|PUT|/api/v1/cloud/bizs/{bk_biz_id}/argument_templates/{id}|业务下更新参数模版，只支持覆盖更新 [biz/argument-template/update_template.md](biz/argument-template/update_template.md)|
+> res 
+
+
+`all_vendor` 
+
+| 方法| URL| 描述&文档 |
+|--------|--------|-----------------|
+|POST|/api/v1/cloud/argument_templates/instance/rule/list|查询参数模版绑定的实例数及规则数列表 [resource/argument-template/list_template_instance_rule.md](resource/argument-template/list_template_instance_rule.md)|
+|POST|/api/v1/cloud/argument_templates/list|业务下查询参数模版列表 [resource/argument-template/list_template.md](resource/argument-template/list_template.md)|
+|POST|/api/v1/cloud/argument_templates/assign/bizs|分配参数模版到业务下 [resource/argument-template/assign_template_to_biz.md](resource/argument-template/assign_template_to_biz.md)|
+|POST|/api/v1/cloud/argument_templates/create|业务下创建参数模版 [resource/argument-template/create_template.md](resource/argument-template/create_template.md)|
 ### **audits**
 
 > biz 
@@ -147,6 +172,16 @@
 |GET|/api/v1/cloud/bizs/{bk_biz_id}/collections/bizs|查询用户收藏的业务ID列表 [biz/get_collection_biz.md](biz/get_collection_biz.md)|
 |DELETE|/api/v1/cloud/bizs/{bk_biz_id}/collections/bizs|删除收藏的业务 [biz/delete_collection_biz.md](biz/delete_collection_biz.md)|
 |POST|/api/v1/cloud/bizs/{bk_biz_id}/collections/bizs/create|添加收藏的业务 [biz/create_collection_biz.md](biz/create_collection_biz.md)|
+> res 
+
+
+`all_vendor` 
+
+| 方法| URL| 描述&文档 |
+|--------|--------|-----------------|
+|POST|/api/v1/cloud/collections/create|添加收藏 [resource/collection/create_collection.md](resource/collection/create_collection.md)|
+|GET|/api/v1/cloud/collections/{res_type}/list|查询某类资源的收藏列表 [resource/collection/list_collection.md](resource/collection/list_collection.md)|
+|DELETE|/api/v1/cloud/collections/{id}|添加收藏 [resource/collection/delete_collection.md](resource/collection/delete_collection.md)|
 ### **cvms**
 
 > biz 
@@ -163,7 +198,7 @@
 |POST|/api/v1/cloud/bizs/{bk_biz_id}/cvms/list|查询虚拟机列表 [biz/list_cvm.md](biz/list_cvm.md)|
 |POST|/api/v1/cloud/bizs/{bk_biz_id}/cvms/batch/reboot|批量重启虚拟机 [biz/batch_reboot_cvm.md](biz/batch_reboot_cvm.md)|
 |DELETE|/api/v1/cloud/bizs/{bk_biz_id}/cvms/batch|批量删除虚拟机 [biz/batch_delete_cvm.md](biz/batch_delete_cvm.md)|
-|GET|/api/v1/cloud/bizs/{bk_biz_id}/cvms/rel_res/batch|查询虚拟机关联资源(仅供前端使用) [biz/query_cvm_related_res.md](biz/query_cvm_related_res.md)|
+|POST|/api/v1/cloud/bizs/{bk_biz_id}/cvms/rel_res/batch|查询虚拟机关联资源(仅供前端使用) [biz/query_cvm_related_res.md](biz/query_cvm_related_res.md)|
 |POST|/api/v1/cloud/bizs/{bk_biz_id}/cvms/batch/stop|批量关闭虚拟机（需注意采用关机方式为强制关机） [biz/batch_stop_cvm.md](biz/batch_stop_cvm.md)|
 > res 
 
@@ -181,7 +216,7 @@
 |POST|/api/v1/cloud/cvms/batch/reboot|批量重启虚拟机 [resource/batch_reboot_cvm.md](resource/batch_reboot_cvm.md)|
 |DELETE|/api/v1/cloud/cvms/batch|批量删除虚拟机 [resource/batch_delete_cvm.md](resource/batch_delete_cvm.md)|
 |POST|/api/v1/cloud/cvms/assign/bizs|分配虚拟机到业务下 [resource/assign_cvm_to_biz.md](resource/assign_cvm_to_biz.md)|
-|GET|/api/v1/cloud/cvms/rel_res/batch|查询虚拟机关联资源(仅供前端使用) [resource/query_cvm_related_res.md](resource/query_cvm_related_res.md)|
+|POST|/api/v1/cloud/cvms/rel_res/batch|查询虚拟机关联资源(仅供前端使用) [resource/query_cvm_related_res.md](resource/query_cvm_related_res.md)|
 |POST|/api/v1/cloud/cvms/prices/inquiry|查询主机售价 [resource/inquiry_price_cvm.md](resource/inquiry_price_cvm.md)|
 |POST|/api/v1/cloud/cvms/batch/stop|批量关闭虚拟机（需注意采用关机方式为强制关机） [resource/batch_stop_cvm.md](resource/batch_stop_cvm.md)|
 ### **default**
@@ -392,8 +427,8 @@
 |--------|--------|-----------------|
 |DELETE|/api/v1/cloud/bizs/{bk_biz_id}/recycled/disks/batch|批量删除回收站中的硬盘 [biz/batch_delete_recycled_disk.md](biz/batch_delete_recycled_disk.md)|
 |DELETE|/api/v1/cloud/bizs/{bk_biz_id}/recycled/cvms/batch|批量删除回收站中的虚拟机 [biz/batch_delete_recycled_cvm.md](biz/batch_delete_recycled_cvm.md)|
-|GET|/api/v1/cloud/bizs/{bk_biz_id}/recycled/cvms/{id}|查询回收站中的虚拟机详情 [biz/get_recycled_cvm.md](biz/get_recycled_cvm.md)|
-|GET|/api/v1/cloud/bizs/{bk_biz_id}/recycled/disks/{id}|查询回收站中的硬盘详情 [biz/get_recycled_disk.md](biz/get_recycled_disk.md)|
+|GET|/api/v1/cloud/bizs/{bk_biz_id}/recycled/cvms/{id}|查询回收站中的虚拟机详情已废弃：请通过普通get接口添加recycle_status='recycling' 过滤条件 [biz/get_recycled_cvm.md](biz/get_recycled_cvm.md)|
+|GET|/api/v1/cloud/bizs/{bk_biz_id}/recycled/disks/{id}|查询回收站中的硬盘详情已废弃：请通过普通get接口添加recycle_status='recycling' 过滤条件 [biz/get_recycled_disk.md](biz/get_recycled_disk.md)|
 > res 
 
 
@@ -403,8 +438,8 @@
 |--------|--------|-----------------|
 |DELETE|/api/v1/cloud/recycled/disks/batch|批量删除回收站中的硬盘 [resource/batch_delete_recycled_disk.md](resource/batch_delete_recycled_disk.md)|
 |DELETE|/api/v1/cloud/recycled/cvms/batch|批量删除回收站中的虚拟机 [resource/batch_delete_recycled_cvm.md](resource/batch_delete_recycled_cvm.md)|
-|GET|/api/v1/cloud/recycled/cvms/{id}|查询回收站中的虚拟机详情 [resource/get_recycled_cvm.md](resource/get_recycled_cvm.md)|
-|GET|/api/v1/cloud/recycled/disks/{id}|查询回收站中的硬盘详情 [resource/get_recycled_disk.md](resource/get_recycled_disk.md)|
+|GET|/api/v1/cloud/recycled/cvms/{id}|查询回收站中的虚拟机详情已废弃：请通过普通get接口添加recycle_status='recycling' 过滤条件 [resource/get_recycled_cvm.md](resource/get_recycled_cvm.md)|
+|GET|/api/v1/cloud/recycled/disks/{id}|查询回收站中的硬盘详情已废弃：请通过普通get接口添加recycle_status='recycling' 过滤条件 [resource/get_recycled_disk.md](resource/get_recycled_disk.md)|
 ### **regions**
 
 > res 
@@ -640,6 +675,28 @@
 |POST|/api/v1/cloud/vendors/tcloud/security_groups/{security_group_id}/rules/create|创建TCloud安全组规则 [resource/create_tcloud_security_group_rule.md](resource/create_tcloud_security_group_rule.md)|
 |POST|/api/v1/cloud/vendors/tcloud/security_groups/{security_group_id}/rules/list|查询TCloud安全组规则列表 [resource/list_tcloud_security_group_rule.md](resource/list_tcloud_security_group_rule.md)|
 |DELETE|/api/v1/cloud/vendors/tcloud/security_groups/{security_group_id}/rules/{id}|删除TCloud安全组规则 [resource/delete_tcloud_security_group_rule.md](resource/delete_tcloud_security_group_rule.md)|
+### **selections**
+
+> res 
+
+
+`all_vendor` 
+
+| 方法| URL| 描述&文档 |
+|--------|--------|-----------------|
+|POST|/api/v1/cloud/selections/schemes/generate|生成云资源选型方案 [resource/cloud-selection/generate_recommend_scheme.md](resource/cloud-selection/generate_recommend_scheme.md)|
+|POST|/api/v1/cloud/selections/schemes/list|查询云选型方案列表 [resource/cloud-selection/list_cloud_selection_scheme.md](resource/cloud-selection/list_cloud_selection_scheme.md)|
+|DELETE|/api/v1/cloud/selections/schemes/batch|批量删除云选型方案 [resource/cloud-selection/batch_delete_cloud_selection_scheme.md](resource/cloud-selection/batch_delete_cloud_selection_scheme.md)|
+|POST|/api/v1/cloud/selections/user_distributions/query|查询云选型用户分布占比 [resource/cloud-selection/query_user_distribution.md](resource/cloud-selection/query_user_distribution.md)|
+|POST|/api/v1/cloud/selections/latency/biz/query|查询业务延迟数据 [resource/cloud-selection/query_biz_latnecy.md](resource/cloud-selection/query_biz_latnecy.md)|
+|POST|/api/v1/cloud/selections/idcs/list|查询idc列表 [resource/cloud-selection/list_idc.md](resource/cloud-selection/list_idc.md)|
+|POST|/api/v1/cloud/selections/countries/list|查询云选型数据支持的国家 [resource/cloud-selection/list_available_country.md](resource/cloud-selection/list_available_country.md)|
+|POST|/api/v1/cloud/selections/idcs/service_areas/{datasource}/query|查询机房服务区域接口 [resource/cloud-selection/query_idc_service_area.md](resource/cloud-selection/query_idc_service_area.md)|
+|POST|/api/v1/cloud/selections/biz_types/list|查询业务类型 [resource/cloud-selection/list_biz_type.md](resource/cloud-selection/list_biz_type.md)|
+|GET|/api/v1/cloud/selections/schemes/{id}|查询云选型方案详情 [resource/cloud-selection/get_cloud_selection_scheme.md](resource/cloud-selection/get_cloud_selection_scheme.md)|
+|POST|/api/v1/cloud/selections/latency/ping/query|查询ping延迟数据 [resource/cloud-selection/query_ping_latnecy.md](resource/cloud-selection/query_ping_latnecy.md)|
+|PATCH|/api/v1/cloud/selections/schemes/{id}|更新云选型方案 [resource/cloud-selection/update_cloud_selection_scheme.md](resource/cloud-selection/update_cloud_selection_scheme.md)|
+|POST|/api/v1/cloud/selections/schemes/create|保存云资源选型方案 [resource/cloud-selection/create_scheme.md](resource/cloud-selection/create_scheme.md)|
 ### **sub_accounts**
 
 > res 
@@ -762,6 +819,24 @@
 | 方法| URL| 描述&文档 |
 |--------|--------|-----------------|
 |POST|/api/v1/web/instance_types/list|查询虚拟机机型列表 [resource/list_instance_type.md](resource/list_instance_type.md)|
+### **subnets**
+
+> biz 
+
+
+`all_vendor` 
+
+| 方法| URL| 描述&文档 |
+|--------|--------|-----------------|
+|POST|/api/v1/web/bizs/{bk_biz_id}/subnets/with/ip_count/list|查询VPC列表且带有子网数量（前端专用） [biz/list_vpc_with_subnet_count_in_biz.md](biz/list_vpc_with_subnet_count_in_biz.md)|
+> res 
+
+
+`all_vendor` 
+
+| 方法| URL| 描述&文档 |
+|--------|--------|-----------------|
+|POST|/api/v1/web/subnets/with/ip_count/list|查询子网列表且带有当前子网可用IP、已用IP、总IP数量 [resource/list_subnet_with_ip_count_for_web.md](resource/list_subnet_with_ip_count_for_web.md)|
 ### **tickets**
 
 > res 
@@ -782,6 +857,7 @@
 
 | 方法| URL| 描述&文档 |
 |--------|--------|-----------------|
+|POST|/api/v1/web/bizs/{bk_biz_id}/vendors/{vendor}/vpcs/with/subnet_count/list|查询子网列表且带有当前子网可用IP、已用IP、总IP数量 [biz/list_subnet_with_ip_count_in_biz.md](biz/list_subnet_with_ip_count_in_biz.md)|
 |POST|/api/v1/web/bizs/{bk_biz_id}/vendors/{vendor}/vpcs/with/subnet_count/list|查询VPC列表且带有子网数量（前端专用） [biz/list_vpc_with_subnet_count.md](biz/list_vpc_with_subnet_count.md)|
 > res 
 
@@ -790,4 +866,6 @@
 
 | 方法| URL| 描述&文档 |
 |--------|--------|-----------------|
+|POST|/api/v1/web/vendors/{vendor}/vpcs/with/subnet_count/list|查询VPC列表且带有子网数量（前端专用） [resource/list_vpc_with_subnet_count_for_web.md](resource/list_vpc_with_subnet_count_for_web.md)|
 |POST|/api/v1/web/vendors/{vendor}/vpcs/with/subnet_count/list|查询VPC列表且带有子网数量（前端专用） [resource/list_vpc_with_subnet_count.md](resource/list_vpc_with_subnet_count.md)|
+
