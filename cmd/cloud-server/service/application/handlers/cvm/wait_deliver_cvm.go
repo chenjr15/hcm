@@ -45,12 +45,14 @@ import (
 // TimingHandleDeliverApplication 定时处理处于回收状态的单据。
 func TimingHandleDeliverApplication(cliSet *client.ClientSet, interval time.Duration) {
 	for {
-		time.Sleep(2 * time.Second)
+		time.Sleep(interval)
 
 		kt := core.NewBackendKit()
 		if err := WaitAndHandleDeliverCvm(kt, cliSet.DataService(), cliSet.TaskServer()); err != nil {
 			logs.Errorf("WaitAndHandleDeliverCvm err: %v, rid: %s", err, kt.Rid)
 		}
+		// TODO 修改为配置控制
+		break
 	}
 }
 

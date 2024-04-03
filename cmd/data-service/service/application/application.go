@@ -48,10 +48,10 @@ func InitApplicationService(cap *capability.Capability) {
 	}
 	h := rest.NewHandler()
 
-	h.Add("Create", "POST", "/applications/create", svc.Create)
-	h.Add("Update", "PATCH", "/applications/{application_id}", svc.Update)
-	h.Add("Get", "GET", "/applications/{application_id}", svc.Get)
-	h.Add("List", "POST", "/applications/list", svc.List)
+	h.Add("CreateApplication", "POST", "/applications/create", svc.Create)
+	h.Add("UpdateApplication", "PATCH", "/applications/{application_id}", svc.Update)
+	h.Add("GetApplication", "GET", "/applications/{application_id}", svc.Get)
+	h.Add("ListApplication", "POST", "/applications/list", svc.List)
 
 	h.Load(cap.WebService)
 }
@@ -60,6 +60,7 @@ type applicationSvc struct {
 	dao dao.Set
 }
 
+// Create CreateApplication
 func (svc *applicationSvc) Create(cts *rest.Contexts) (interface{}, error) {
 	req := new(proto.ApplicationCreateReq)
 	if err := cts.DecodeInto(req); err != nil {
@@ -102,6 +103,7 @@ func (svc *applicationSvc) Create(cts *rest.Contexts) (interface{}, error) {
 	return &core.CreateResult{ID: id}, nil
 }
 
+// Update Application
 func (svc *applicationSvc) Update(cts *rest.Contexts) (interface{}, error) {
 	applicationID := cts.PathParameter("application_id").String()
 
@@ -151,6 +153,7 @@ func (svc *applicationSvc) convertToApplicationResp(
 	}
 }
 
+// List Application
 func (svc *applicationSvc) List(cts *rest.Contexts) (interface{}, error) {
 	req := new(proto.ApplicationListReq)
 	if err := cts.DecodeInto(req); err != nil {
@@ -182,6 +185,7 @@ func (svc *applicationSvc) List(cts *rest.Contexts) (interface{}, error) {
 	return &proto.ApplicationListResult{Details: details}, nil
 }
 
+// Get Application
 func (svc *applicationSvc) Get(cts *rest.Contexts) (interface{}, error) {
 	applicationID := cts.PathParameter("application_id").String()
 

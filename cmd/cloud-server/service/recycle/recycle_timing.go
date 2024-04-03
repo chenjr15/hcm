@@ -56,7 +56,7 @@ func RecycleTiming(c *client.ClientSet, state serviced.State, conf cc.Recycle, e
 		state:  state,
 		logics: logics.NewLogics(c, esbClient),
 	}
-
+	// TODO 使配置生效
 	go r.recycleTiming(enumor.DiskCloudResType, r.recycleDiskWorker, conf)
 	go r.recycleTiming(enumor.CvmCloudResType, r.recycleCvmWorker, conf)
 }
