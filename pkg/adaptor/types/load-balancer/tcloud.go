@@ -50,6 +50,7 @@ type TCloudLoadBalancerInstType int64
 const (
 	// DefaultLoadBalancerInstType 1:通用的负载均衡实例，目前只支持传入1
 	DefaultLoadBalancerInstType TCloudLoadBalancerInstType = 1
+	TraditionalClbType          TCloudLoadBalancerInstType = 0
 )
 
 // TCloudDefaultISP 默认ISP
@@ -173,6 +174,11 @@ func (clb TCloudClb) GetIPVersion() enumor.IPAddressType {
 	}
 	// fall back to unknown
 	return enumor.IPAddressType(ver)
+}
+
+// IsTraditionalClb 是否是传统型CLB
+func (clb TCloudClb) IsTraditionalClb() bool {
+	return clb.LoadBalancer != nil && cvt.PtrToVal(clb.Forward) != uint64(TraditionalClbType)
 }
 
 // -------------------------- List Listeners--------------------------

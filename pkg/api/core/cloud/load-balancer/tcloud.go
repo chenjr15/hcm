@@ -118,6 +118,8 @@ type TCloudClbExtension struct {
 	TargetRegion *string `json:"target_region,omitempty"`
 	// 跨域1.0 为0表示基础网络
 	TargetCloudVpcID *string `json:"target_vpc,omitempty"`
+	// 负载均衡类型，0 传统负载均衡，1 负载均衡
+	Forward *uint64 `json:"forward,omitempty"`
 }
 
 // SnatIp ...
