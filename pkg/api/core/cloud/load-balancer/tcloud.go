@@ -20,7 +20,6 @@
 package loadbalancer
 
 import (
-	loadbalancer "hcm/pkg/adaptor/types/load-balancer"
 	cvt "hcm/pkg/tools/converter"
 )
 
@@ -125,7 +124,7 @@ type TCloudClbExtension struct {
 
 // IsTraditional 是否是传统型负载均衡
 func (ext *TCloudClbExtension) IsTraditional() bool {
-	return cvt.PtrToVal(ext.Forward) == uint64(loadbalancer.TraditionalClbType)
+	return cvt.PtrToVal(ext.Forward) == uint64(TCloudDefaultLoadBalancerType)
 }
 
 // SnatIp ...
@@ -215,3 +214,12 @@ type TCloudListenerExtension struct {
 
 // TCloudListener ...
 type TCloudListener = Listener[TCloudListenerExtension]
+
+// TCloudLoadBalancerInstType 负载均衡实例的类型
+type TCloudLoadBalancerInstType int64
+
+const (
+	// TCloudDefaultLoadBalancerType 1:通用的负载均衡实例，目前只支持传入1
+	TCloudDefaultLoadBalancerType TCloudLoadBalancerInstType = 1
+	TCloudTraditionalClbType      TCloudLoadBalancerInstType = 0
+)
