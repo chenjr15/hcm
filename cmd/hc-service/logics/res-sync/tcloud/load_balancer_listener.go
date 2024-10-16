@@ -56,7 +56,7 @@ func (cli *client) listenerByLbBatch(kt *kit.Kit, params *SyncListenerBatchOptio
 	err := concurrence.BaseExec(constant.CLBListenerSyncConcurrencyMaxLimit, params.LbInfos,
 		func(lb corelb.TCloudLoadBalancer) error {
 			newKit := kt.NewSubKit()
-			if cvt.PtrToVal(lb.Extension.Forward) != 1 {
+			if lb.Extension.IsTraditional() {
 				logs.Warnf("unsupport tradition load balancer, will skip, lb: %s, rid: %s", lb.CloudID, newKit.Rid)
 				return nil
 			}

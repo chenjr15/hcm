@@ -20,6 +20,7 @@
 package loadbalancer
 
 import (
+	loadbalancer "hcm/pkg/adaptor/types/load-balancer"
 	cvt "hcm/pkg/tools/converter"
 )
 
@@ -120,6 +121,11 @@ type TCloudClbExtension struct {
 	TargetCloudVpcID *string `json:"target_vpc,omitempty"`
 	// 负载均衡类型，0 传统负载均衡，1 负载均衡
 	Forward *uint64 `json:"forward,omitempty"`
+}
+
+// IsTraditional 是否是传统型负载均衡
+func (ext *TCloudClbExtension) IsTraditional() bool {
+	return cvt.PtrToVal(ext.Forward) == uint64(loadbalancer.TraditionalClbType)
 }
 
 // SnatIp ...

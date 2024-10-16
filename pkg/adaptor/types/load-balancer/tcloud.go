@@ -178,7 +178,7 @@ func (clb TCloudClb) GetIPVersion() enumor.IPAddressType {
 
 // IsTraditionalClb 是否是传统型CLB
 func (clb TCloudClb) IsTraditionalClb() bool {
-	return clb.LoadBalancer != nil && cvt.PtrToVal(clb.Forward) != uint64(TraditionalClbType)
+	return clb.LoadBalancer != nil && cvt.PtrToVal(clb.Forward) == uint64(TraditionalClbType)
 }
 
 // -------------------------- List Listeners--------------------------
